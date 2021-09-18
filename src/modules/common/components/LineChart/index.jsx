@@ -8,31 +8,49 @@ export default function LineChart({
         datasets: datasets.map(dataset => ({
             ...dataset,
             fill: false,
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgba(255, 99, 132, 0.8)',
+            backgroundColor: 'rgb(46, 134, 222)',
+            borderColor: 'rgba(46, 134, 222, 0.8)',
             cubicInterpolationMode: 'monotone',
-            tension: 0.8
+            tension: 1.2,
+            pointBackgroundColor: 'rgba(0,0,0,0)',
+            pointBorderColor: 'rgba(0,0,0,0)',
+            pointHoverBackgroundColor: 'rgba(46, 134, 222, 0.9)',
         })),
     };
 
     const options = {
+        legend: {
+            display: false
+        },
         scales: {
-            yAxes: [{
+            ticks: {
+                display: false
+            },
+            yAxes: {
+                display: false,
                 ticks: {
                     beginAtZero: false,
+                    // display: false,
                 },
                 gridLines: {
-                    color: "rgba(0, 0, 0, 0)",
+                    // color: "green",
+                    display: false,
+                    drawBorder: false,
+                    // drawOnChartArea: false,
+                    // drawOnArea: false,
+                }
+            },
+            xAxes: {
+                display: false,
+                ticks: {
                     display: true,
-                    drawBorder: false
+                },
+                grid: {
+                    // drawBorder: false,
+                    drawOnChartArea: false,
+                    drawOnArea: false,
                 }
-            }],
-            xAxes: [{
-                gridLines: {
-                    color: "rgba(0, 0, 0, 0)",
-                    drawBorder: false
-                }
-            }],
+            },
         },
     };
 
