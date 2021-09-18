@@ -1,0 +1,1 @@
+export const API_ENDPOINT = "http://cors-anywhere.herokuapp.com/https://api.coingecko.com/api/v3"
