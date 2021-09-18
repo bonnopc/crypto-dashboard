@@ -1,0 +1,9 @@
+.root {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.selected {
+    background-color: rgba(0, 0, 0, 0.15);
+}

@@ -8,7 +8,7 @@ import combinedClassNames from "helpers/combinedClassNames";
 import React from "react";
 
 export default function PriceHistoriesLineChart({
-    prices=[], headerElementType="h2"
+    prices=[], headerElementType="h2", actionButtons
 }) {
     const currentValue = prices?.length ? prices[prices.length - 1].value : 0
     const prevValue = prices?.length ? prices[0].value : 0
@@ -18,22 +18,25 @@ export default function PriceHistoriesLineChart({
 
     return (
         <div className={styles.root}>
-            <div className={styles.header}>
-                {React.createElement(
-                    headerElementType,
-                    null,
-                    `$ ${currentValue?.toLocaleString()}`
-                )}
+            <div className={styles.headerContainer}>
+                <div className={styles.header}>
+                    {React.createElement(
+                        headerElementType,
+                        null,
+                        `$ ${currentValue?.toLocaleString()}`
+                    )}
 
-                <p className={combinedClassNames(styles, {
-                    green: isPriceIncreased,
-                    red: isPriceDecreased
-                }, styles.subTitle)}>
-                    { isPriceIncreased ? <UpArrowIcon className={styles.marginRight} /> : "" }
-                    { isPriceDecreased ? <DownArrowIcon className={styles.marginRight} /> : "" }
-                    <span className={styles.marginRight}>${ (currentValue - prevValue)?.toLocaleString() }</span>
-                    <span>({ (((currentValue * prevValue) / prevValue) * 100)?.toLocaleString() }%)</span>
-                </p>
+                    <p className={combinedClassNames(styles, {
+                        green: isPriceIncreased,
+                        red: isPriceDecreased
+                    }, styles.subTitle)}>
+                        { isPriceIncreased ? <UpArrowIcon className={styles.marginRight} /> : "" }
+                        { isPriceDecreased ? <DownArrowIcon className={styles.marginRight} /> : "" }
+                        <span className={styles.marginRight}>${ (currentValue - prevValue)?.toLocaleString() }</span>
+                        <span>({ (((currentValue * prevValue) / prevValue) * 100)?.toLocaleString() }%)</span>
+                    </p>
+                </div>
+                <div className={styles.actions}> { actionButtons } </div>
             </div>
 
             <LineChart

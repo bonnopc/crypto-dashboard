@@ -6,29 +6,31 @@ import { setSelectedCurrencyPrices } from "modules/dashboard/reducers"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
 import { useSelector } from "react-redux"
+import DurationButtons from "../DurationButtons"
 import styles from "./IndividualCurrencyPriceChart.module.css"
 
 export default function IndividualCurrencyPriceChart(){
     const [isLoading,setLoader] = useState(false)
+    const [duration,setDuration] = useState(365)
     const currency = useSelector(state => state.dashboard.selectedCurrency)
     const currencyPrices = useSelector(state => state.dashboard.selectedCurrencyPrices)
     const dispatch = useDispatch()
 
     useEffect(() => {
         if(currency?.id) getCurrencyPrices(currency.id)
-    }, [currency?.id])
+    }, [currency?.id,duration])
 
     const getCurrencyPrices = async (id) => {
         setLoader(true)
 
-        const prices = await actionGetPriceHistoryByCoinId(id)
+        const prices = await actionGetPriceHistoryByCoinId(id,duration)
 
         if(prices) dispatch(setSelectedCurrencyPrices(prices))
 
         setLoader(false)
     }
 
-    if(isLoading) return <CommonLoader/>
+    if(isLoading && !currencyPrices?.length) return <CommonLoader/>
     else if(currencyPrices?.length){
         return (
             <div>
@@ -43,13 +45,23 @@ export default function IndividualCurrencyPriceChart(){
                     <h3>{ currency.name }</h3>
                 </div>
 
-                <PriceHistoriesLineChart
+                {
+                    isLoading ?
+                    <CommonLoader/> :
+                    <PriceHistoriesLineChart
                     prices={currencyPrices.map(price => ({
                         timestamp: price[0],
                         value: price[1]
                     }))}
                     headerElementType="h3"
+                    actionButtons={(
+                        <DurationButtons
+                            duration={duration}
+                            onChange={duration => setDuration(duration)}
+                        />
+                    )}
                 />
+                }
             </div>
         )
     }
