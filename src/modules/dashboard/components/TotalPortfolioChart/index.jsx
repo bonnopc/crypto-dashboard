@@ -19,41 +19,45 @@ export default function TotalPortfolioChart() {
 
     const getTotalPortfolioPrices = async (currencies) => {
         setPortfolioLoader(true)
+        dispatch(setPortfolio([])) // initializing before fetch
 
-        const allCurrencies = await actionGetPriceHistories(currencies,duration)
+        const pricesByCurrencies = await actionGetPriceHistories(currencies,duration)
         const quantity = 5
 
-        if (allCurrencies?.length) {
-            let totalPrices = []
+        if (pricesByCurrencies?.length) {
+            let totalPricesByTime = []
 
-            for (let i = 0; i < allCurrencies[0]?.length; i++) {
+            for (let i = 0; i < pricesByCurrencies[0]?.length; i++) {
                 let value = 0, timestamp;
 
-                allCurrencies.forEach(currency => {
-                    value += currency[i] ? (currency[i][1] * quantity) : 0
-                    if(currency[i]) timestamp = currency[i][0]
+                pricesByCurrencies.forEach(currency => {
+                    value += currency && currency[i] && currency[i][1] ? (currency[i][1] * quantity) : 0
+                    if(currency && currency[i] && currency[i][0]) timestamp = currency[i][0]
                 });
 
-                totalPrices.push({ timestamp, value })
+                totalPricesByTime.push({ timestamp, value })
             }
 
-            dispatch(setPortfolio(totalPrices))
+            dispatch(setPortfolio(totalPricesByTime))
         }
 
         setPortfolioLoader(false)
     }
 
     if (isLoadingPortfoilo) return <CommonLoader />
-
-    return (
-        <PriceHistoriesLineChart 
-            prices={portfoilo} 
-            actionButtons={(
-                <DurationButtons
-                    duration={duration}
-                    onChange={duration => setDuration(duration)}
-                />
-            )}
-        />
-    )
+    else if(portfoilo?.length){
+        return (
+            <PriceHistoriesLineChart 
+                prices={portfoilo} 
+                actionButtons={(
+                    <DurationButtons
+                        duration={duration}
+                        onChange={duration => setDuration(duration)}
+                    />
+                )}
+            />
+        )
+    }
+    
+    return "Couldn't find any data!"
 }

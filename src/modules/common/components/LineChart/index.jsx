@@ -9,7 +9,7 @@ export default function LineChart({
             ...dataset,
             fill: false,
             backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgba(255, 99, 132, 0.2)',
+            borderColor: 'rgba(255, 99, 132, 0.8)',
             cubicInterpolationMode: 'monotone',
             tension: 0.8
         })),
@@ -21,13 +21,15 @@ export default function LineChart({
                 ticks: {
                     beginAtZero: false,
                 },
-                gridLines: {
+                grids: {
                     color: "rgba(0, 0, 0, 0)",
+                    display: false
                 }
             }],
             xAxes: [{
-                gridLines: {
+                grids: {
                     color: "rgba(0, 0, 0, 0)",
+                    drawBorder: false
                 }
             }],
         },

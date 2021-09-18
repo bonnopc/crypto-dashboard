@@ -49,22 +49,22 @@ export default function IndividualCurrencyPriceChart(){
                     isLoading ?
                     <CommonLoader/> :
                     <PriceHistoriesLineChart
-                    prices={currencyPrices.map(price => ({
-                        timestamp: price[0],
-                        value: price[1]
-                    }))}
-                    headerElementType="h3"
-                    actionButtons={(
-                        <DurationButtons
-                            duration={duration}
-                            onChange={duration => setDuration(duration)}
-                        />
-                    )}
-                />
+                        prices={currencyPrices.map(price => ({
+                            timestamp: price[0],
+                            value: price[1]
+                        }))}
+                        headerElementType="h3"
+                        actionButtons={(
+                            <DurationButtons
+                                duration={duration}
+                                onChange={duration => setDuration(duration)}
+                            />
+                        )}
+                    />
                 }
             </div>
         )
     }
 
-    return ""
+    return "No data found!"
 }
