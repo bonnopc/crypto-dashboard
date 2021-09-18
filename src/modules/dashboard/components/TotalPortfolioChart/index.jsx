@@ -3,9 +3,7 @@ import actionGetPriceHistories from "modules/dashboard/actions/actionGetPriceHis
 import { setPortfolio } from "modules/dashboard/reducers"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import { Line } from 'react-chartjs-2';
-import getDateFromMilliseconds from "helpers/getDateFromMilliseconds"
-import styles from "./TotalPortfolioChart.module.css"
+import PriceHistoriesLineChart from "modules/common/components/PriceHistoriesLineChart"
 
 export default function TotalPortfolioChart() {
     const [isLoadingPortfoilo, setPortfolioLoader] = useState(false)
@@ -26,15 +24,15 @@ export default function TotalPortfolioChart() {
         if (allCurrencies?.length) {
             let totalPrices = []
 
-            for (let i = 0; i < allCurrencies[0].prices.length; i++) {
-                let totalValue = 0, timestamp;
+            for (let i = 0; i < allCurrencies[0].length; i++) {
+                let value = 0, timestamp;
 
                 allCurrencies.forEach(currency => {
-                    totalValue += (currency.prices[i][1] * quantity)
-                    timestamp = currency.prices[i][0]
+                    value += (currency[i][1] * quantity)
+                    timestamp = currency[i][0]
                 });
 
-                totalPrices.push({ timestamp, totalValue })
+                totalPrices.push({ timestamp, value })
             }
 
             dispatch(setPortfolio(totalPrices))
@@ -43,44 +41,7 @@ export default function TotalPortfolioChart() {
         setPortfolioLoader(false)
     }
 
-    const data = {
-        labels: portfoilo.map(elem => getDateFromMilliseconds(elem.timestamp)),
-        datasets: [
-            {
-                // label: '# of Votes',
-                data: portfoilo.map(elem => elem.totalValue),
-                fill: false,
-                backgroundColor: 'rgb(255, 99, 132)',
-                borderColor: 'rgba(255, 99, 132, 0.2)',
-                cubicInterpolationMode: 'monotone',
-                tension: 0.8
-            },
-        ],
-    };
-
-    const options = {
-        scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: false,
-                },
-                gridLines: {
-                    color: "rgba(0, 0, 0, 0)",
-                }
-            }],
-            xAxes: [{
-                gridLines: {
-                    color: "rgba(0, 0, 0, 0)",
-                }
-            }],
-        },
-    };
-
     if (isLoadingPortfoilo) return <CommonLoader />
 
-    return (
-        <div className={styles.root}>
-            <Line data={data} options={options} />
-        </div>
-    )
+    return <PriceHistoriesLineChart prices={portfoilo} />
 }

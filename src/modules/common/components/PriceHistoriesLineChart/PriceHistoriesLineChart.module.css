@@ -1,0 +1,32 @@
+.root {
+    margin-bottom: 2rem;
+}
+
+.header {
+    margin-bottom: 1rem;
+}
+
+.green {
+    color: #05c46b;
+}
+
+.green svg {
+    fill: #05c46b;
+}
+
+.red {
+    color: #f53b57;
+}
+
+.red svg {
+    fill: #f53b57;
+}
+
+.marginRight {
+    margin-right: 0.25rem;
+}
+
+.subTitle {
+    display: flex;
+    align-items: center;
+}
