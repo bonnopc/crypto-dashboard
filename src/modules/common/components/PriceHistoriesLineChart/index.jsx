@@ -33,7 +33,7 @@ export default function PriceHistoriesLineChart({
                         { isPriceIncreased ? <UpArrowIcon className={styles.marginRight} /> : "" }
                         { isPriceDecreased ? <DownArrowIcon className={styles.marginRight} /> : "" }
                         <span className={styles.marginRight}>${ (currentValue - prevValue)?.toLocaleString() }</span>
-                        <span>({ (((currentValue * prevValue) / prevValue) * 100)?.toLocaleString() }%)</span>
+                        <span>({ (((currentValue - prevValue) / prevValue) * 100)?.toFixed(2) }%)</span>
                     </p>
                 </div>
                 <div className={styles.actions}> { actionButtons } </div>

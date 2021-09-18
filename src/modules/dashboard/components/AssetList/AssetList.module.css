@@ -18,8 +18,8 @@
 }
 
 .itemIcon {
-    flex: 1 1 16.66%;
-    max-width: 16.66%;
+    flex: 1 1 10%;
+    max-width: 10%;
 }
 
 .itemIcon img {
@@ -27,8 +27,8 @@
 }
 
 .title {
-    flex: 1 1 58.33%;
-    max-width: 58.33%;
+    flex: 1 1 70%;
+    max-width: 70%;
     padding-left: 1rem;
 }
 

@@ -42,7 +42,7 @@ export default function IndividualCurrencyPriceChart(){
                         fallbackSrc="https://picsum.photos/200"
                     />
                     {/* <img className={styles.icon} src={currency.image} alt={currency.name} /> */}
-                    <h3>{ currency.name }</h3>
+                    <h2>{ currency.name }</h2>
                 </div>
 
                 {

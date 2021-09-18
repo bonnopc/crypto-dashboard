@@ -21,13 +21,14 @@ export default function LineChart({
                 ticks: {
                     beginAtZero: false,
                 },
-                grids: {
+                gridLines: {
                     color: "rgba(0, 0, 0, 0)",
-                    display: false
+                    display: true,
+                    drawBorder: false
                 }
             }],
             xAxes: [{
-                grids: {
+                gridLines: {
                     color: "rgba(0, 0, 0, 0)",
                     drawBorder: false
                 }
