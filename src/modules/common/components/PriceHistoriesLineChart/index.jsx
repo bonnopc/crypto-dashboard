@@ -5,9 +5,10 @@ import PropTypes from "prop-types"
 import { ReactComponent as UpArrowIcon } from 'assets/icons/arrow_drop_up.svg';
 import { ReactComponent as DownArrowIcon } from 'assets/icons/arrow_drop_down.svg';
 import combinedClassNames from "helpers/combinedClassNames";
+import React from "react";
 
 export default function PriceHistoriesLineChart({
-    prices=[]
+    prices=[], headerElementType="h2"
 }) {
     const currentValue = prices?.length ? prices[prices.length - 1].value : 0
     const prevValue = prices?.length ? prices[0].value : 0
@@ -18,7 +19,11 @@ export default function PriceHistoriesLineChart({
     return (
         <div className={styles.root}>
             <div className={styles.header}>
-                <h2>${currentValue?.toLocaleString()}</h2>
+                {React.createElement(
+                    headerElementType,
+                    null,
+                    `$ ${currentValue?.toLocaleString()}`
+                )}
 
                 <p className={combinedClassNames(styles, {
                     green: isPriceIncreased,
@@ -46,5 +51,6 @@ PriceHistoriesLineChart.propTypes = {
     prices: PropTypes.arrayOf(PropTypes.shape({
         timestamp: PropTypes.number.isRequired,
         value: PropTypes.number.isRequired
-    })).isRequired
+    })).isRequired,
+    headerElementType: PropTypes.string,   // dom element type, default is 'h2'
 }

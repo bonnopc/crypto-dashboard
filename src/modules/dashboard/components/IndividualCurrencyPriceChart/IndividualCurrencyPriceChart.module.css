@@ -1,0 +1,10 @@
+.header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 3rem;
+}
+
+.icon {
+    width: 6rem;
+    margin-right: 2rem;
+}

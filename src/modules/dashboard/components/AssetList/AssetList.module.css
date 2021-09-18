@@ -1,0 +1,40 @@
+.itemRoot {
+    display: flex;
+    align-items: center;
+    padding: 1rem 0.5rem;
+    cursor: pointer;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    margin-left: -0.5rem;
+}
+
+.itemRoot:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+.itemRoot:not(:last-child) {
+    border-bottom-color: rgba(0, 0, 0, 0.15);
+}
+
+.itemIcon {
+    flex: 1 1 16.66%;
+    max-width: 16.66%;
+}
+
+.itemIcon img {
+    width: 100%;
+}
+
+.title {
+    flex: 1 1 58.33%;
+    max-width: 58.33%;
+    padding-left: 1rem;
+}
+
+.value {
+    flex: 1 1 25%;
+    max-width: 25%;
+    padding-left: 0.5rem;
+    text-align: right;
+}

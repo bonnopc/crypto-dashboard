@@ -1,9 +1,9 @@
 import CommonLoader from "modules/common/components/CommonLoader"
+import PriceHistoriesLineChart from "modules/common/components/PriceHistoriesLineChart"
 import actionGetPriceHistories from "modules/dashboard/actions/actionGetPriceHistories"
 import { setPortfolio } from "modules/dashboard/reducers"
 import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
-import PriceHistoriesLineChart from "modules/common/components/PriceHistoriesLineChart"
 
 export default function TotalPortfolioChart() {
     const [isLoadingPortfoilo, setPortfolioLoader] = useState(false)
@@ -24,7 +24,7 @@ export default function TotalPortfolioChart() {
         if (allCurrencies?.length) {
             let totalPrices = []
 
-            for (let i = 0; i < allCurrencies[0].length; i++) {
+            for (let i = 0; i < allCurrencies[0]?.length; i++) {
                 let value = 0, timestamp;
 
                 allCurrencies.forEach(currency => {

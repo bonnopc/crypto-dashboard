@@ -2,7 +2,9 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     currencies: [],
-    portfoilo: []
+    portfoilo: [],
+    selectedCurrency: {},
+    selectedCurrencyPrices: []
 }
 
 const dashboard = createSlice({
@@ -14,10 +16,21 @@ const dashboard = createSlice({
         },
         setPortfolio: (state,action) => {
             state.portfoilo = [...action.payload]
+        },
+        setSelectedCurrency: (state,action) => {
+            state.selectedCurrency = {...action.payload}
+        },
+        setSelectedCurrencyPrices: (state,action) => {
+            state.selectedCurrencyPrices = [...action.payload]
         }
     }
 })
 
-export const { setCurrencies, setPortfolio } = dashboard.actions
+export const { 
+    setCurrencies, 
+    setPortfolio, 
+    setSelectedCurrency,
+    setSelectedCurrencyPrices,
+} = dashboard.actions
 
 export default dashboard.reducer
